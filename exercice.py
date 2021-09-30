@@ -54,7 +54,7 @@ def get_tag_prefix(text, opening_tags, closing_tags):
 	return (None, None)
 
 def check_tags(full_text, group_tag_names, text_tag_names, comment_tags):
-	liste = remove_comments("".join(full_text).replace(" ", ""),comment_tags[0],comment_tags[1])
+	liste = remove_comments("".join(full_text).replace(" ", "").replace("<br>","").replace("<head/>", ""),comment_tags[0],comment_tags[1])
 	if not liste:
 		return False
 	if isinstance(text_tag_names, tuple):
@@ -64,7 +64,7 @@ def check_tags(full_text, group_tag_names, text_tag_names, comment_tags):
 		liste = remove_comments(liste, f"<{text_tag_names}>", f"</{text_tag_names}>")
 	if not liste:
 		return False
-	print(liste)
+		
 	tag_names = ["<"+tag+"></"+tag+">" for tag in group_tag_names]
 	pre_lenght = 0
 	while len(liste)!=pre_lenght:
